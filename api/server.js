@@ -1,5 +1,5 @@
 const express = require('express');
-const userRoute = require('./routes/user.routes')
+const userRoutes = require('./routes/user.routes');
 require('dotenv').config({path: "./config/.env"});
 require('./config/db');
 
@@ -7,7 +7,7 @@ const app = express();
 
 
 //Routes
-app.use('/api/user', userRoute);
+app.use('/api/user', userRoutes);
 
 
 //Serveur
