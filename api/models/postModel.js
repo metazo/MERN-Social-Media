@@ -1,32 +1,41 @@
 const mongoose = require('mongoose');
-const { isEmail } = require('validator');
 
-const userSchema = new mongoose.Schema (
-    {
-        pseudo: {
-            type: String,
-            required: true,
-            minLength: 3,
-            maxLength: 55,
-            unique: true,
-            trim: true
-        },
-        email: {
-            type: String,
-            required: true,
-            validate: { isEmail },
-            lowercase: true,
-            trim: true
-        },
-        password: {
-            type: String,
-            required: true,
-            max: 1024,
-            minLength: 6
+const PostSchema = new mongoose.Schema(
+  {
+    posterId: {
+      type: String,
+      required: true
+    },
+    message: {
+      type: String,
+      trim: true,
+      maxlength: 500,
+    },
+    picture: {
+      type: String,
+    },
+    video: {
+      type: String,
+    },
+    likers: {
+      type: [String],
+      required: true,
+    },
+    comments: {
+      type: [
+        {
+          commenterId:String,
+          commenterPseudo: String,
+          text: String,
+          timestamp: Number,
         }
-    }
-)
+      ],
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User
+module.exports = mongoose.model('post', PostSchema);
