@@ -2,9 +2,11 @@ import React from 'react';
 
 const Profil = () => {
     return (
-        <div>
-            Profil
+       <div className="profile-page">
+        <div className="log-container">
+
         </div>
+       </div>
     );
 };
 
