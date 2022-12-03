@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
 
-const Log = () => {
-  const [signUpModal, setSignUpModal] = useState(true);
-  const [signInModal, setSignInModal] = useState(false);
+const Log = (props) => {
+  const [signUpModal, setSignUpModal] = useState(props.signup);
+  const [signInModal, setSignInModal] = useState(props.signin);
 
   const handleModals = (e) => {
     if (e.target.id === "register") {
       setSignInModal(false);
       setSignUpModal(true);
-    } else if(e.target.id === "login") {
+    } else if (e.target.id === "login") {
       setSignUpModal(false);
       setSignInModal(true);
     }
@@ -20,8 +20,20 @@ const Log = () => {
     <div className="connection-form">
       <div className="form-container">
         <ul>
-          <li onclick={handleModals} id="register">S'inscrire</li>
-          <li onclick={handleModals} id="login">Se connecter</li>
+          <li
+            onclick={handleModals}
+            id="register"
+            className={signUpModal ? "active-btn" : null}
+          >
+            S'inscrire
+          </li>
+          <li
+            onclick={handleModals}
+            id="login"
+            className={signInModal ? "active-btn" : null}
+          >
+            Se connecter
+          </li>
         </ul>
         {signUpModal && <SignUpForm />}
         {signInModal && <SignInForm />}
